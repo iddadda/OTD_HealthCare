@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: OTD_Health_Care
+  datasource:
+    url: jdbc:log4jdbc:mariadb://localhost/otd_health_care
+    username: root
+    password: green502
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+  jpa:
+    database: mysql
+    defer-datasource-initialization: true #JPA ??? ?? ?? data.sql
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 20
+        format_sql: true #???? ???? ?? ??? ??? ?
+        order_updates: true
+        show_sql: true
+  sql:
+    init:
+      mode: always
+
+mybatis:
+  mapper-locations: classpath:/mappers/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
