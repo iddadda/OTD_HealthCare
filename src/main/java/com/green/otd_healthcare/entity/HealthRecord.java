@@ -3,13 +3,15 @@ package com.green.otd_healthcare.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class HealthRecord extends CreatedAt {
+public class HealthRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
@@ -35,4 +37,7 @@ public class HealthRecord extends CreatedAt {
 
     @Column(nullable = false)
     private int weight;
+
+    @Column(nullable = false)
+    private LocalDateTime healthRecordDateTime;
 }
