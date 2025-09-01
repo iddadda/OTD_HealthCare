@@ -10,8 +10,8 @@ spring:
     database: mysql
     defer-datasource-initialization: true #JPA ??? ?? ?? data.sql
     hibernate:
-      #ddl-auto: update
-      ddl-auto: create
+      ddl-auto: update
+      #ddl-auto: create
     properties:
       hibernate:
         jdbc:
