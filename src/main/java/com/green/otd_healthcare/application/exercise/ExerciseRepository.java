@@ -1,4 +1,7 @@
 package com.green.otd_healthcare.application.exercise;
 
-public interface ExerciseRepository {
+import com.green.otd_healthcare.entity.Exercise;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ExerciseRepository extends JpaRepository<Exercise, Long> {
 }
