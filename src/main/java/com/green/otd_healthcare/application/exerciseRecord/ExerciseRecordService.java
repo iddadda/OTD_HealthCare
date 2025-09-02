@@ -1,6 +1,9 @@
 package com.green.otd_healthcare.application.exerciseRecord;
 
+import com.green.otd_healthcare.application.common.model.PagingDto;
+import com.green.otd_healthcare.application.common.model.PagingReq;
 import com.green.otd_healthcare.application.exercise.ExerciseRepository;
+import com.green.otd_healthcare.application.exerciseRecord.model.ExerciseRecordGetRes;
 import com.green.otd_healthcare.application.exerciseRecord.model.ExerciseRecordPostReq;
 import com.green.otd_healthcare.entity.Exercise;
 import com.green.otd_healthcare.entity.ExerciseRecord;
@@ -10,12 +13,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class ExerciseRecordService {
     private final ExerciseRecordRepository exerciseRecordRepository;
     private final ExerciseRepository exerciseRepository;
+    private final ExerciseRecordMapper exerciseRecordMapper;
 
     //    [post] exerciseRecord
     public Long saveExerciseRecord(ExerciseRecordPostReq req) {
@@ -29,11 +35,21 @@ public class ExerciseRecordService {
                 .exerciseKcal(req.getExerciseKcal())
                 .effortLevel(req.getEffortLevel())
                 .exercise(exerciseId)
-                .exerciseDateTime(req.getExerciseDateTime())
+                .exerciseDatetime(req.getExerciseDateTime())
                 .build();
 
 
         return exerciseRecordRepository.save(exerciseRecord).getExerciseRecordId();
+    }
+
+    //    [GET] recordList -> page
+    public List<ExerciseRecordGetRes> getExerciseLogList(PagingReq req) {
+        PagingDto dto = PagingDto.builder()
+                .size(req.getRowPerPage())
+                .startIdx((req.getPage() - 1) * req.getRowPerPage())
+                .build();
+
+        return exerciseRecordMapper.findByLimitTo(dto);
     }
 
 }
