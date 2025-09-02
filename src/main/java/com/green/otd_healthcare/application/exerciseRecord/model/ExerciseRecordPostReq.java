@@ -19,7 +19,7 @@ public class ExerciseRecordPostReq {
 
     @NotNull(message = "운동일자 입력은 필수")
     @PastOrPresent(message = "운동일자는 과거나 현재여야 합니다")
-    private LocalDateTime exerciseDateTime;
+    private LocalDateTime exerciseDatetime;
 
     @NotNull(message = "운동 소요 시간 입력은 필수")
     @Positive(message = "운동 소요 시간은 양수여야 합니다")
